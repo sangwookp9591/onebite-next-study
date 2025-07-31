@@ -13,5 +13,10 @@ import type { AppProps } from 'next/app';
  * pageProps -> page전달할 props
  */
 export default function App({ Component, pageProps }: AppProps) {
-    return <Component {...pageProps} />;
+    return (
+        <>
+            <header>글로벌 헤더</header>
+            <Component {...pageProps} />
+        </>
+    );
 }
