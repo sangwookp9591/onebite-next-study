@@ -31,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <header>
                 {/* a tag는 csr방식이아닌 페이지를 이동시키는 방법임 서버에서 매번 새로운 페이지를 요청함 그래서 자체 LInk component를 사용 */}
                 {/* Link는 csr를 사용 */}
+                {/* LInk컴포넌트와 프로그래매틱한 페이지 이동의 차이는 pre-fetching 차이 */}
                 <Link href={'/'}>index</Link>
                 &nbsp;
                 <Link href={'/search'}>search</Link>
