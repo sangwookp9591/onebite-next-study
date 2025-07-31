@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 //페이지의 역할을 하진않지만 공통 로직 및 레이아웃을 다루는 페이지
 
 //root component 모든 페이지를 하는 컴포넌트의 부모 컴포넌트
@@ -14,6 +15,12 @@ import Link from 'next/link';
  * pageProps -> page전달할 props
  */
 export default function App({ Component, pageProps }: AppProps) {
+    const router = useRouter();
+    //link가아닌 프로그래매틱한 페이지 이동(Programmatic Navigation)
+    //csr
+    const onClickButton = () => {
+        router.push('/test');
+    };
     return (
         <>
             <header>
@@ -24,6 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Link href={'/search'}>search</Link>
                 &nbsp;
                 <Link href={'/book/1'}>book-1</Link>
+                <div>
+                    <button onClick={onClickButton}>/test 페이지로 이동</button>
+                </div>
             </header>
             <Component {...pageProps} />
         </>
