@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
+import Link from 'next/link';
 //페이지의 역할을 하진않지만 공통 로직 및 레이아웃을 다루는 페이지
 
 //root component 모든 페이지를 하는 컴포넌트의 부모 컴포넌트
@@ -15,7 +16,15 @@ import type { AppProps } from 'next/app';
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
-            <header>글로벌 헤더</header>
+            <header>
+                {/* a tag는 csr방식이아닌 페이지를 이동시키는 방법임 서버에서 매번 새로운 페이지를 요청함 그래서 자체 LInk component를 사용 */}
+                {/* Link는 csr를 사용 */}
+                <Link href={'/'}>index</Link>
+                &nbsp;
+                <Link href={'/search'}>search</Link>
+                &nbsp;
+                <Link href={'/book/1'}>book-1</Link>
+            </header>
             <Component {...pageProps} />
         </>
     );
