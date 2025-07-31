@@ -34,7 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 {/* LInk컴포넌트와 프로그래매틱한 페이지 이동의 차이는 pre-fetching 차이 */}
                 <Link href={'/'}>index</Link>
                 &nbsp;
-                <Link href={'/search'}>search</Link>
+                <Link href={'/search'} prefetch={false}>
+                    search
+                </Link>
                 &nbsp;
                 <Link href={'/book/1'}>book-1</Link>
                 <div>
