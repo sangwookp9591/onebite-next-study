@@ -21,3 +21,12 @@
     color: black;
     text-decoration: none;
 }
+
+.main {
+    padding-top: 10px;
+}
+
+.footer {
+    padding: 100px 0px;
+    color: gray;
+}
