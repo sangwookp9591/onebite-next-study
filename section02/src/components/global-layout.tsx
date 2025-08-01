@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import styles from './global-layout.module.css';
 
 export default function GlobalLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div>
+        <div className={styles.container}>
             <header>
                 <Link href={'/'}>📚 ONEBITE BOOKS</Link>
             </header>
