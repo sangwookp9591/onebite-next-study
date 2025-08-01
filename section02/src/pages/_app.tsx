@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         router.push('/test');
     };
 
+    //test page를 app불러올때 prefetch 설정을 해놓음.
     useEffect(() => {
         router.prefetch('/test');
     }, []);
