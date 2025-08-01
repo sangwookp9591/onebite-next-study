@@ -1,13 +1,18 @@
+import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
 
 export default function SearchableLayout({ children }: { children: ReactNode }) {
+    const router = useRouter();
     const [search, setSearch] = useState<string>('');
 
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target?.value);
     };
 
-    const onSubmit = () => {};
+    const onSubmit = () => {
+        if (!search) return;
+        router.push(`/search?q=${search}`);
+    };
     return (
         <div>
             <div>
