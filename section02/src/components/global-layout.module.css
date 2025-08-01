@@ -8,3 +8,11 @@
     box-shadow: rgba(100, 100, 100, 0.2) 0px 0px 29px 0px;
     padding: 0px 15px;
 }
+
+.header {
+    height: 60px;
+
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 60px;
+}
