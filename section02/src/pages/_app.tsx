@@ -4,11 +4,12 @@ import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
     console.log('Component getLayout', Component?.getLayout);
+
+    const getLayout = Component.getLayout;
+
     return (
         <>
-            <GlobalLayout>
-                <Component {...pageProps} />
-            </GlobalLayout>
+            <GlobalLayout>{getLayout(<Component {...pageProps} />)}</GlobalLayout>
         </>
     );
 }
