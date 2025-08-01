@@ -16,3 +16,8 @@
     font-size: 18px;
     line-height: 60px;
 }
+
+.header > a {
+    color: black;
+    text-decoration: none;
+}
