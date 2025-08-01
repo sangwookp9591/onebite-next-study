@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
         router.prefetch('/test');
     }, []);
+
     return (
         <>
             <header>
