@@ -4,7 +4,7 @@ import styles from './global-layout.module.css';
 export default function GlobalLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className={styles.container}>
-            <header>
+            <header className={styles.header}>
                 <Link href={'/'}>📚 ONEBITE BOOKS</Link>
             </header>
             <main>{children}</main>
