@@ -7,8 +7,8 @@ export default function GlobalLayout({ children }: { children: React.ReactNode }
             <header className={styles.header}>
                 <Link href={'/'}>📚 ONEBITE BOOKS</Link>
             </header>
-            <main>{children}</main>
-            <footer>제작 @Sangwook</footer>
+            <main className={styles.main}>{children}</main>
+            <footer className={styles.footer}>제작 @Sangwook</footer>
         </div>
     );
 }
