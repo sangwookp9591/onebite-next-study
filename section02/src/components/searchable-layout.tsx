@@ -18,7 +18,7 @@ export default function SearchableLayout({ children }: { children: ReactNode }) 
     };
 
     const onSubmit = () => {
-        if (!search) return;
+        if (!search || q === search) return;
         router.push(`/search?q=${search}`);
     };
 
