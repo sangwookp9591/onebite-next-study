@@ -3,9 +3,14 @@ import styles from './index.module.css';
 
 export default function Home() {
     return (
-        <>
-            <h1 className={styles.h1}>인덱스</h1>
-        </>
+        <div className={styles.container}>
+            <section>
+                <h3>지금 추천하는 도서</h3>
+            </section>
+            <section>
+                <h3>등록된 모든 도서 </h3>
+            </section>
+        </div>
     );
 }
 
