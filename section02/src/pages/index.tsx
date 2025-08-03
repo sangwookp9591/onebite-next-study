@@ -16,6 +16,9 @@ export const getServerSideProps = () => {
 
     console.log('서버사이드프롭스 입니다.');
 
+    //만약 브라우저 환경에서만 이용할 수 있는 예를 들면 이런 윈도우 객체의
+    // window.location 이렇게하면 에러가 발생함, 자바스크립트의 윈도우는 브라우저를 의미함,
+    // 서버에서실행되는 ServerSideProps 에선 window는 undefined가됨 window객체의 locaiton, confirm, alert다 사용불가
     const data = 'hello';
 
     //return 안에 props라는 프로퍼티로 객체로 넣어줘서 home Component에 전달하도록함.
