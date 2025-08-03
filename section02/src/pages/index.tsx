@@ -11,7 +11,20 @@ import BookItem from '@/components/book-item';
  2. getServerSideProps 함수가 동작해서 데이터를 패칭해서 가져오거나하는 역할을 수행함
  3. 페이지 컴포넌트가 동작함.
  */
-export const getServerSideProps = () => {};
+export const getServerSideProps = () => {
+    //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
+
+    const data = 'hello';
+
+    //return 안에 props라는 프로퍼티로 객체로 넣어줘서 home Component에 전달하도록함.
+    // getServerSideProps는 반드시 return  {props : }
+    // 이렇게 props라는 객체 프로퍼티를 포함하는 단 하나의 객체여야한다
+    return {
+        props: {
+            data,
+        },
+    };
+};
 export default function Home() {
     return (
         <div className={styles.container}>
