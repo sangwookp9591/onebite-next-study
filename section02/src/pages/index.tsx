@@ -6,6 +6,10 @@ import BookItem from '@/components/book-item';
 /**  이렇게하면 이 index.tsx페이지는 ssr방식으로 사전렌더링이 이루어진다.
 왜그런가? getServerSideProps 라는 약속된 이름의 함수를 만들어서
  export 하게되면 해당페이지는 SSR로 동작하도록 자동으로 설정됨
+
+ 1. localhost:3000의 index페이지로 요청하면
+ 2. getServerSideProps 함수가 동작해서 데이터를 패칭해서 가져오거나하는 역할을 수행함
+ 3. 페이지 컴포넌트가 동작함.
  */
 export const getServerSideProps = () => {};
 export default function Home() {
