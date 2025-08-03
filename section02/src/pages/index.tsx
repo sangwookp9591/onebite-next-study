@@ -2,6 +2,7 @@ import SearchableLayout from '@/components/searchable-layout';
 import styles from './index.module.css';
 import books from '@/mock/books.json';
 import BookItem from '@/components/book-item';
+import { useEffect } from 'react';
 
 /**  이렇게하면 이 index.tsx페이지는 ssr방식으로 사전렌더링이 이루어진다.
 왜그런가? getServerSideProps 라는 약속된 이름의 함수를 만들어서
@@ -44,6 +45,13 @@ export default function Home({ data }) {
 
     // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
     console.log('data : ', data);
+
+    //컴포넌트들 또한 서버에서 1번 실행이되기 때문에 아무런 조건없이 window객체 이런 것을 사용하면 오류가 발생함
+    //서버에서실행하면 window가 undefined니깐 undefined를 호출하는꼴이되어버림 console.log(window)
+    //window같은 객체를 쓰고싶으면 useEffect같이 브라우저에서만 실행되고싶은거랑 같기 때문에 컴포넌트 마운트 이후에 실행됨
+    useEffect(() => {
+        console.log(window);
+    }, []);
     return (
         <div className={styles.container}>
             <section>
