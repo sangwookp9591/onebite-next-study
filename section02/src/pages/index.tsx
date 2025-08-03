@@ -30,8 +30,20 @@ export const getServerSideProps = () => {
         },
     };
 };
+
+//페이지 역할을 하는 이 컴포넌트 또한 사실은 서버에서 한번 먼저 실행이 된 다음에 그다음에 브라우저에서 한번더 실행됨.
+/**
+ * 1. 브라우저로 부터 접속 요청을 받았을 때 사전 렌더링을 위해서 먼저 서버 측에서 한번 Home Component실행
+ * 2. 브라우저에서 자바스크립트 번들 형태로 전달이 되어서 브라우저 측에서 실행이 될 때
+ *    즉 하이드레이션 과정이 진행이 될 때 한번 더 실행이 됨
+ *
+ *서버 한번  브라우저 한번
+ */
 export default function Home({ data }) {
     //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
+
+    // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
+    console.log('data : ', data);
     return (
         <div className={styles.container}>
             <section>
