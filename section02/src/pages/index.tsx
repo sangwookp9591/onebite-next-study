@@ -14,6 +14,8 @@ import BookItem from '@/components/book-item';
 export const getServerSideProps = () => {
     //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
 
+    console.log('서버사이드프롭스 입니다.');
+
     const data = 'hello';
 
     //return 안에 props라는 프로퍼티로 객체로 넣어줘서 home Component에 전달하도록함.
