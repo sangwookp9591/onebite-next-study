@@ -25,7 +25,8 @@ export const getServerSideProps = () => {
         },
     };
 };
-export default function Home() {
+export default function Home({ data }) {
+    //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
     return (
         <div className={styles.container}>
             <section>
