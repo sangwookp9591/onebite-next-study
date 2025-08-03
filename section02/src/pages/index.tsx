@@ -45,11 +45,11 @@ export const getServerSideProps = () => {
 // props타입
 //InferGetServerSidePropsType 는 serverSideProps의 반환값 타입을 자동으로 추론해주는 그런 기능을 하는 타입
 //제네릭으로 getServerSideProps함수를 넣어주면 자동으로 함수의 반환값 타입이 추론이되어 매개변수 넣어짐
-export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
 
     // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
-    console.log('data : ', data);
+    console.log('data : ', props.data);
 
     //컴포넌트들 또한 서버에서 1번 실행이되기 때문에 아무런 조건없이 window객체 이런 것을 사용하면 오류가 발생함
     //서버에서실행하면 window가 undefined니깐 undefined를 호출하는꼴이되어버림 console.log(window)
