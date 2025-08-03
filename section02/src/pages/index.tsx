@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import books from '@/mock/books.json';
 import BookItem from '@/components/book-item';
 import { useEffect } from 'react';
+import { InferGetServerSidePropsType } from 'next';
 
 /**  이렇게하면 이 index.tsx페이지는 ssr방식으로 사전렌더링이 이루어진다.
 왜그런가? getServerSideProps 라는 약속된 이름의 함수를 만들어서
@@ -40,7 +41,11 @@ export const getServerSideProps = () => {
  *
  *서버 한번  브라우저 한번
  */
-export default function Home({ data }) {
+
+// props타입
+//InferGetServerSidePropsType 는 serverSideProps의 반환값 타입을 자동으로 추론해주는 그런 기능을 하는 타입
+//제네릭으로 getServerSideProps함수를 넣어주면 자동으로 함수의 반환값 타입이 추론이되어 매개변수 넣어짐
+export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
 
     // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
