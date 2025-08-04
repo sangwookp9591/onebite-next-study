@@ -7,6 +7,7 @@ import {
 } from 'next';
 import fetchOneBooks from '@/lib/fetch-one-book';
 import { useRouter } from 'next/router';
+import { notFound } from 'next/navigation';
 
 // export const getServerSideProps = async (context: GetServerSidePropsContext) => {
 //     //url parameter를 불러오기윟
@@ -58,6 +59,12 @@ export const getStaticPaths = () => {
 export const getStaticProps = async (context: GetStaticPropsContext) => {
     const id = context.params!.id;
     const book = await fetchOneBooks(Number(id));
+
+    if (!book) {
+        return {
+            notFound: true,
+        };
+    }
 
     return {
         props: {
