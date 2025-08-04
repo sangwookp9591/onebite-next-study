@@ -6,6 +6,7 @@ import {
     InferGetStaticPropsType,
 } from 'next';
 import fetchOneBooks from '@/lib/fetch-one-book';
+import { useRouter } from 'next/router';
 
 // export const getServerSideProps = async (context: GetServerSidePropsContext) => {
 //     //url parameter를 불러오기윟
@@ -66,9 +67,10 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 export default function Page({ book }: InferGetStaticPropsType<typeof getStaticProps>) {
-    if (!book) return '문제가 발생했습니다 다시 실행해주세요.';
+    const router = useRouter();
 
-    // const router = useRouter();
+    if (router.isFallback) return '로딩중입니다.';
+    if (!book) return '문제가 발생했습니다 다시 실행해주세요.';
 
     // console.log('router : ', router);
 
