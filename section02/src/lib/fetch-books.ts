@@ -1,4 +1,6 @@
-export default async function fetchBooks() {
+import { BookData } from '@/types';
+
+export default async function fetchBooks(): Promise<BookData[]> {
     const url = `http://localhost:12345/book`;
 
     try {
@@ -6,6 +8,7 @@ export default async function fetchBooks() {
         if (!res.ok) {
             throw new Error();
         }
+        return await res?.json();
     } catch (err) {
         console.log(err);
         return [];
