@@ -1,6 +1,5 @@
 import SearchableLayout from '@/components/searchable-layout';
 import styles from './index.module.css';
-import books from '@/mock/books.json';
 import BookItem from '@/components/book-item';
 import { useEffect } from 'react';
 import { InferGetServerSidePropsType } from 'next';
