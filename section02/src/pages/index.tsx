@@ -4,6 +4,7 @@ import books from '@/mock/books.json';
 import BookItem from '@/components/book-item';
 import { useEffect } from 'react';
 import { InferGetServerSidePropsType } from 'next';
+import fetchBooks from '@/lib/fetch-books';
 
 /**  이렇게하면 이 index.tsx페이지는 ssr방식으로 사전렌더링이 이루어진다.
 왜그런가? getServerSideProps 라는 약속된 이름의 함수를 만들어서
@@ -13,22 +14,24 @@ import { InferGetServerSidePropsType } from 'next';
  2. getServerSideProps 함수가 동작해서 데이터를 패칭해서 가져오거나하는 역할을 수행함
  3. 페이지 컴포넌트가 동작함.
  */
-export const getServerSideProps = () => {
+export const getServerSideProps = async () => {
     //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
 
-    console.log('서버사이드프롭스 입니다.');
+    // console.log('서버사이드프롭스 입니다.');
 
     //만약 브라우저 환경에서만 이용할 수 있는 예를 들면 이런 윈도우 객체의
     // window.location 이렇게하면 에러가 발생함, 자바스크립트의 윈도우는 브라우저를 의미함,
     // 서버에서실행되는 ServerSideProps 에선 window는 undefined가됨 window객체의 locaiton, confirm, alert다 사용불가
-    const data = 'hello';
+    // const data = 'hello';
 
     //return 안에 props라는 프로퍼티로 객체로 넣어줘서 home Component에 전달하도록함.
     // getServerSideProps는 반드시 return  {props : }
     // 이렇게 props라는 객체 프로퍼티를 포함하는 단 하나의 객체여야한다
+
+    const allBooks = await fetchBooks();
     return {
         props: {
-            data,
+            allBooks,
         },
     };
 };
@@ -45,11 +48,11 @@ export const getServerSideProps = () => {
 // props타입
 //InferGetServerSidePropsType 는 serverSideProps의 반환값 타입을 자동으로 추론해주는 그런 기능을 하는 타입
 //제네릭으로 getServerSideProps함수를 넣어주면 자동으로 함수의 반환값 타입이 추론이되어 매개변수 넣어짐
-export default function Home({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ allBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
 
     // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
-    console.log('data : ', data);
+    console.log('allBooks : ', allBooks);
 
     //컴포넌트들 또한 서버에서 1번 실행이되기 때문에 아무런 조건없이 window객체 이런 것을 사용하면 오류가 발생함
     //서버에서실행하면 window가 undefined니깐 undefined를 호출하는꼴이되어버림 console.log(window)
@@ -67,7 +70,7 @@ export default function Home({ data }: InferGetServerSidePropsType<typeof getSer
             </section>
             <section>
                 <h3>등록된 모든 도서 </h3>
-                {books.map((book) => (
+                {allBooks.map((book) => (
                     <BookItem key={book?.id} {...book} />
                 ))}
             </section>
