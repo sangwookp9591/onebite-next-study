@@ -29,8 +29,8 @@ export const getServerSideProps = async () => {
     // getServerSideProps는 반드시 return  {props : }
     // 이렇게 props라는 객체 프로퍼티를 포함하는 단 하나의 객체여야한다
 
-    const allBooks = await fetchBooks();
-    const recoBooks = await fetchRandomBooks();
+    const [allBooks, recoBooks] = await Promise.all([fetchBooks(), fetchRandomBooks()]);
+
     return {
         props: {
             allBooks,
