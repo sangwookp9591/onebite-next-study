@@ -15,7 +15,9 @@ import fetchRandomBooks from '@/lib/fetch-random-books';
  3. 페이지 컴포넌트가 동작함.
  */
 export const getStaticProps = async () => {
-    console.log('인데스 페이지'); //빌드에서 딱 한번만 호출될 거임
+    console.log('인데스 페이지');
+    //브라우저 새로고침이 계속 일어나고 있음, -> 개발모드라서 그럼 , 수정결과가 바로바로 사전렌더링하기때문임 제대로 동작을 확인하려면 build해서 production 모드로해야함
+
     //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
 
     // console.log('서버사이드프롭스 입니다.');
