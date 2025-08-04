@@ -44,12 +44,13 @@ export const getStaticPaths = () => {
         /*false -> 1,2,3이 아닌존재하지 않는 페이지는 Not found*/
 
         /**
-         * fallback: 'blocking'
+         * fallback: 'blocking'  SSR방식
          * build time이후에 생성된 이런 페이지들은 처음 요청할 때에는 즉각적으로 생성이 되어야 되기 때문에 SSR방식으로 동작해서 비교적 느리기게 페이지가 렌더링 될 수 있지만 한 번만 만들면 넥스트 서버에 저장이 되기 때문에 그 이후 요청은 페이지를 새롭게 생성할 피요가 없다.
          */
 
         /**
-         * true로 하면 페이지는 즉각적으로 생성을하고 props(data)가 없는 빈 페이지를 반환하고 props를 계산해서 데이터가 있는 상태의 페이지를 렌더링함
+         * fallbakc: true  SSR방식
+         * - 페이지는 즉각적으로 생성을하고 props(data)가 없는 빈 페이지를 반환하고 props를 계산해서 데이터가 있는 상태의 페이지를 렌더링함
          *
          */
         fallback: true,
