@@ -2,7 +2,7 @@ import SearchableLayout from '@/components/searchable-layout';
 import styles from './index.module.css';
 import BookItem from '@/components/book-item';
 import { useEffect } from 'react';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/fetch-books';
 import fetchRandomBooks from '@/lib/fetch-random-books';
 
@@ -14,7 +14,8 @@ import fetchRandomBooks from '@/lib/fetch-random-books';
  2. getServerSideProps 함수가 동작해서 데이터를 패칭해서 가져오거나하는 역할을 수행함
  3. 페이지 컴포넌트가 동작함.
  */
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
+    console.log('인데스 페이지'); //빌드에서 딱 한번만 호출될 거임
     //컴포넌트보다 먼저 실행되어서, 컴포넌트에 필요한 데이터 불러오는 함수
 
     // console.log('서버사이드프롭스 입니다.');
@@ -50,7 +51,7 @@ export const getServerSideProps = async () => {
 // props타입
 //InferGetServerSidePropsType 는 serverSideProps의 반환값 타입을 자동으로 추론해주는 그런 기능을 하는 타입
 //제네릭으로 getServerSideProps함수를 넣어주면 자동으로 함수의 반환값 타입이 추론이되어 매개변수 넣어짐
-export default function Home({ allBooks, recoBooks }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ allBooks, recoBooks }: InferGetStaticPropsType<typeof getStaticProps>) {
     //기존 react app에서하듯이 똑같이 props를 받아올수 있음.
 
     // 그래서 Home component가 1,2에서 두번 싫행되기때문에 log가 두번 호출될거임 (서버 쪽에서 log, 브라우저 쪽에서 log)
