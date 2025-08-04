@@ -39,7 +39,7 @@ export const getStaticPaths = () => {
         //대첵, 대비책, 보험 ,
         //paths값에 존재하지 않는 경로로 요청했을때 대비책
         // false -> 1,2,3이 아닌존재하지 않는 페이지는 Not found
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
@@ -54,7 +54,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     };
 };
 
-export default function Page({ book }: InferGetStaticPropsType<typeof getStatisProps>) {
+export default function Page({ book }: InferGetStaticPropsType<typeof getStaticProps>) {
     if (!book) return '문제가 발생했습니다 다시 실행해주세요.';
 
     // const router = useRouter();
