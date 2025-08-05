@@ -7,7 +7,6 @@ import {
 } from 'next';
 import fetchOneBooks from '@/lib/fetch-one-book';
 import { useRouter } from 'next/router';
-import { notFound } from 'next/navigation';
 
 // export const getServerSideProps = async (context: GetServerSidePropsContext) => {
 //     //url parameter를 불러오기윟
