@@ -7,6 +7,7 @@ import {
 } from 'next';
 import fetchOneBooks from '@/lib/fetch-one-book';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 // export const getServerSideProps = async (context: GetServerSidePropsContext) => {
 //     //url parameter를 불러오기윟
@@ -86,16 +87,25 @@ export default function Page({ book }: InferGetStaticPropsType<typeof getStaticP
     const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 
     return (
-        <div className={styles.container}>
-            <div className={styles.cover_img_container} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
-                <img src={coverImgUrl} />
+        <>
+            <Head>
+                <title>{title}</title>
+                <meta property="og:image" content={coverImgUrl} />
+                {/* og:image 로 썸네일을 설정할거라고 알림 / 는  project의 public 경로를 나타내는 거임 */}
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+            </Head>
+            <div className={styles.container}>
+                <div className={styles.cover_img_container} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
+                    <img src={coverImgUrl} />
+                </div>
+                <div className={styles.title}>{title}</div>
+                <div className={styles.subTitle}>{subTitle}</div>
+                <div className={styles.author}>
+                    {author} | {publisher}
+                </div>
+                <div>{description}</div>
             </div>
-            <div className={styles.title}>{title}</div>
-            <div className={styles.subTitle}>{subTitle}</div>
-            <div className={styles.author}>
-                {author} | {publisher}
-            </div>
-            <div>{description}</div>
-        </div>
+        </>
     );
 }
