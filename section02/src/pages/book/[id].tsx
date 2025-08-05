@@ -78,7 +78,20 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 export default function Page({ book }: InferGetStaticPropsType<typeof getStaticProps>) {
     const router = useRouter();
 
-    if (router.isFallback) return '로딩중입니다.';
+    // if (router.isFallback) return '로딩중입니다.';
+    // 여기서 걸려버리면 metatag가 안나오기때문에 추가
+
+    if (router.isFallback) {
+        return (
+            <Head>
+                <title>한입 북스</title>
+                <meta property="og:image" content="/thumbnail.png" />
+                {/* og:image 로 썸네일을 설정할거라고 알림 / 는  project의 public 경로를 나타내는 거임 */}
+                <meta property="og:title" content="한입 북스" />
+                <meta property="og:description" content="한입북스에 등록된 도서들을 만나보세요" />
+            </Head>
+        );
+    }
     if (!book) return '문제가 발생했습니다 다시 실행해주세요.';
 
     // console.log('router : ', router);
