@@ -4,6 +4,7 @@ import BookItem from '@/components/book-item';
 import { InferGetStaticPropsType } from 'next';
 import fetchBooks from '@/lib/fetch-books';
 import fetchRandomBooks from '@/lib/fetch-random-books';
+import Head from 'next/head';
 
 export const getStaticProps = async () => {
     //브라우저 새로고침이 계속 일어나고 있음, -> 개발모드라서 그럼 , 수정결과가 바로바로 사전렌더링하기때문임 제대로 동작을 확인하려면 build해서 production 모드로해야함
@@ -56,20 +57,25 @@ export default function Home({ allBooks, recoBooks }: InferGetStaticPropsType<ty
     //     console.log(window);
     // }, []);
     return (
-        <div className={styles.container}>
-            <section>
-                <h3>지금 추천하는 도서</h3>
-                {recoBooks.map((book) => (
-                    <BookItem key={book?.id} {...book} />
-                ))}
-            </section>
-            <section>
-                <h3>등록된 모든 도서 </h3>
-                {allBooks.map((book) => (
-                    <BookItem key={book?.id} {...book} />
-                ))}
-            </section>
-        </div>
+        <>
+            <Head>
+                <title>한입 북스</title>
+            </Head>
+            <div className={styles.container}>
+                <section>
+                    <h3>지금 추천하는 도서</h3>
+                    {recoBooks.map((book) => (
+                        <BookItem key={book?.id} {...book} />
+                    ))}
+                </section>
+                <section>
+                    <h3>등록된 모든 도서 </h3>
+                    {allBooks.map((book) => (
+                        <BookItem key={book?.id} {...book} />
+                    ))}
+                </section>
+            </div>
+        </>
     );
 }
 
