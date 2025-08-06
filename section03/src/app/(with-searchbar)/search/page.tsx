@@ -1,15 +1,18 @@
-import ClientComponent from '@/components/client-component';
+import books from "@/mock/books.json";
+import BookItem from "@/components/book-item";
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ q: string }> }) {
-    //App라우터에서 query string이나, url parameter와 같은 경로상에 포함되는 값들은 Page Component의 props로 받아온다
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
 
-    const { q } = await searchParams;
-    return (
-        <div>
-            Search 페이지 {q}
-            <ClientComponent>
-                <></>
-            </ClientComponent>
-        </div>
-    );
+  return (
+    <div>
+      {books.map((book) => (
+        <BookItem key={book.id} {...book} />
+      ))}
+    </div>
+  );
 }
