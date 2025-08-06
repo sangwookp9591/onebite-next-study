@@ -1,18 +1,22 @@
-import ClientComponent from '../../components/client-component';
-import styles from './page.module.css';
-import ServerComponent from '../../components/server-component';
+import BookItem from "@/components/book-item";
+import style from "./page.module.css";
+import books from "@/mock/books.json";
 
 export default function Home() {
-    console.log('Home 컴포넌트 실행'); // server component기 때문에 브라우저에서는 log가 남지 않는다.
-
-    const secretKey = 'qwer123';
-
-    return (
-        <div>
-            인덱스 페이
-            <ClientComponent>
-                <ServerComponent />
-            </ClientComponent>
-        </div>
-    );
+  return (
+    <div className={style.container}>
+      <section>
+        <h3>지금 추천하는 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+      <section>
+        <h3>등록된 모든 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+    </div>
+  );
 }
