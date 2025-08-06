@@ -82,6 +82,7 @@ export default function Page({ book }: InferGetStaticPropsType<typeof getStaticP
     // 여기서 걸려버리면 metatag가 안나오기때문에 추가
 
     if (router.isFallback) {
+        //이렇듯 fallback상태에서는 기본적인 메타 테그를 반환해주는게 좋단
         return (
             <Head>
                 <title>한입 북스</title>
