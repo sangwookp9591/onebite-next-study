@@ -1,6 +1,6 @@
-import React from 'react';
+import { ReactNode } from 'react';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: ReactNode }) {
     return (
         <div>
             <div>임시 서치바</div>
