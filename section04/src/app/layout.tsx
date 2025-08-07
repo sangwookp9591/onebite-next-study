@@ -1,11 +1,12 @@
 import './globals.css';
 import Link from 'next/link';
 import style from './layout.module.css';
+import { BookData } from '@/types';
 
 async function Footer() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
     if (!res.ok) return <footer>제작 @winterlood</footer>;
-    const allBooks = await res.json();
+    const allBooks: BookData[] = await res.json();
     const bookCount = allBooks?.length;
     return (
         <footer>
