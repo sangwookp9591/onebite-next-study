@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             곧바로 렌더링하지않고 대체 UI가렌더링이되고 
             비동기 작업이 종료가되면 즉 Searchbar로 치면 useSearchParams() 호출이 끝날때 (query string을 불러왔을때 , 브라우저에 마운트가 됐을때) 종료가됨
             */}
-
+            <div>{new Date().toLocaleString()}</div>
             <Suspense fallback={<div>Loading....</div>}>
                 <Searchbar />
             </Suspense>
