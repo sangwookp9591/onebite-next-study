@@ -3,7 +3,7 @@ import style from './page.module.css';
 import { BookData } from '@/types';
 
 async function AllBooks() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, { cache: 'force-cache' });
     // 요청 할때마다 매번 새롭게 발생
     if (!res.ok) {
         return <div>오류가 발생했습니다.</div>;
