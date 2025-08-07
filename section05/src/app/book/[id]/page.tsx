@@ -1,5 +1,6 @@
 import { BookData } from '@/types';
 import style from './page.module.css';
+import { notFound } from 'next/navigation';
 
 /**
  * 어떤 url parameter가 들어올지 모르는 동적경로를 받는 페이지라서
@@ -20,6 +21,9 @@ export default async function Page({ params }: { params: Promise<{ id: string | 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`);
 
     if (!res.ok) {
+        if (res.status === 404) {
+            notFound(); // 자동으로 404 page로 redirect
+        }
         return <div>오류가 발생했습니다.</div>;
     }
 
