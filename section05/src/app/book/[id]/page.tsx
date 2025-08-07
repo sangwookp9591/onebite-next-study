@@ -2,6 +2,10 @@ import { BookData } from '@/types';
 import style from './page.module.css';
 import { notFound } from 'next/navigation';
 
+// 만약 [{ id: '1' }, { id: '2' }, { id: '3' }]; 이 파라미터 이외에는 모두다 404페이지로 보내고싶으면
+// false일 경우 이페이지의 url parameter는 전혀 다이나믹하면 안되겠구나 1,2,3 이외에는 Url parameter가 존재하면 안되겠구나 라고 생각함
+// export const dynamicparams = false;
+
 /**
  * 어떤 url parameter가 들어올지 모르는 동적경로를 받는 페이지라서
  * dynamic page이다.
