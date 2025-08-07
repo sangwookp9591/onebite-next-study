@@ -4,7 +4,7 @@ import books from '@/mock/books.json';
 import { BookData } from '@/types';
 
 async function AllBooks() {
-    const res = await fetch(`http://localhost:12345/book`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
     if (!res.ok) {
         return <div>오류가 발생했습니다.</div>;
     }
@@ -21,7 +21,7 @@ async function AllBooks() {
 }
 
 async function RecoBooks() {
-    const res = await fetch(`http://localhost:12345/book/random`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/random`);
     if (!res.ok) {
         return <div>오류가 발생했습니다.</div>;
     }
