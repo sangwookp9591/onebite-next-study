@@ -1,43 +1,47 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import style from "./serachbar.module.css";
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import style from './serachbar.module.css';
 
 export default function Searchbar() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [search, setSearch] = useState("");
+    const router = useRouter();
+    /*
+    SearchBar Component를 실행해 버리면 useSearchParams훅이 호출이 되어야 되기때문에 문제가 발생
+    query String은 빌드타임에 존재하지 않는다.
+    build 타임에는 절대로 값을 알수없는 이러한 query string같은 값을 불러오는 훅을 실행하려고 하면
+    지금 현재는 이값을 절대로 알수없기때문에  
+     에러 발생 ⨯ useSearchParams() should be wrapped in a suspense boundary at page "/".
+     */
+    const searchParams = useSearchParams();
 
-  const q = searchParams.get("q");
+    const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    setSearch(q || "");
-  }, [q]);
+    const q = searchParams.get('q');
 
-  const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
+    useEffect(() => {
+        setSearch(q || '');
+    }, [q]);
 
-  const onSubmit = () => {
-    if (!search || q === search) return;
-    router.push(`/search?q=${search}`);
-  };
+    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      onSubmit();
-    }
-  };
+    const onSubmit = () => {
+        if (!search || q === search) return;
+        router.push(`/search?q=${search}`);
+    };
 
-  return (
-    <div className={style.container}>
-      <input
-        value={search}
-        onChange={onChangeSearch}
-        onKeyDown={onKeyDown}
-      />
-      <button onClick={onSubmit}>검색</button>
-    </div>
-  );
+    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            onSubmit();
+        }
+    };
+
+    return (
+        <div className={style.container}>
+            <input value={search} onChange={onChangeSearch} onKeyDown={onKeyDown} />
+            <button onClick={onSubmit}>검색</button>
+        </div>
+    );
 }
