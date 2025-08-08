@@ -2,9 +2,10 @@ import BookItem from '@/components/book-item';
 import style from './page.module.css';
 import { BookData } from '@/types';
 import { delay } from '@/util/delay';
+import { Suspense } from 'react';
 
 async function AllBooks() {
-    await delay(1500);
+    await delay(3000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, { cache: 'force-cache' });
     // 요청 할때마다 매번 새롭게 발생
     if (!res.ok) {
@@ -44,11 +45,15 @@ export default function Home() {
         <div className={style.container}>
             <section>
                 <h3>지금 추천하는 도서</h3>
-                <RecoBooks />
+                <Suspense fallback={<div>도서를 불러오는 중입니다.</div>}>
+                    <RecoBooks />
+                </Suspense>
             </section>
             <section>
                 <h3>등록된 모든 도서</h3>
-                <AllBooks />
+                <Suspense fallback={<div>도서를 불러오는 중입니다.</div>}>
+                    <AllBooks />
+                </Suspense>
             </section>
         </div>
     );
