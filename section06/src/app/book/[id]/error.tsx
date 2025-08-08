@@ -13,7 +13,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
 
     return (
         <div>
-            <h3>오류가 발생했습니다.</h3>
+            <h3>책상세조회에서 오류가 발생했습니다.</h3>
             <button
                 onClick={() => {
                     startTransition(() => {
