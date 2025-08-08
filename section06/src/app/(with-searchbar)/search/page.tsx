@@ -2,12 +2,10 @@ import BookItem from '@/components/book-item';
 import { BookData } from '@/types';
 import { delay } from '@/util/delay';
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+//비동기 부분을 Component로 분리
+async function SearchResult({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
     const { q } = await searchParams;
-
-    //검색이 늦어질경우 전체 페이지가 지체되지 않도록 설정
-
-    // await delay(3000);
+    await delay(3000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`, {
         cache: 'force-cache',
     });
@@ -23,4 +21,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ q
             ))}
         </div>
     );
+}
+
+//이제 이 Page Component는 어떠한 비동기 작업도 처리하지 않기 때문에 async 제거
+export default function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+    //검색이 늦어질경우 전체 페이지가 지체되지 않도록 설정
+
+    return <SearchResult searchParams={searchParams} />;
 }
