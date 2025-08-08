@@ -9,11 +9,12 @@
     width: 80px;
     height: 100px;
     background-color: rgb(230, 230, 230);
+    position: relative;
+    overflow: hidden;
 }
 
 .info_container {
     flex: 1;
-    /* 좌우로 늘어날수 있ㅇ만큼 */
 }
 
 .title,
@@ -22,4 +23,32 @@
     width: 100%;
     height: 20px;
     background-color: rgb(230, 230, 230);
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* shimmer 애니메이션용 가상요소 */
+.cover_img::after,
+.title::after,
+.subTitle::after,
+.author::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150px;
+    width: 150px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -150px;
+    }
+    100% {
+        left: 100%;
+    }
 }
