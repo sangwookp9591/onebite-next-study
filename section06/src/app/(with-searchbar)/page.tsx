@@ -4,6 +4,7 @@ import { BookData } from '@/types';
 import { delay } from '@/util/delay';
 import { Suspense } from 'react';
 import BookItemSkeleton from '@/components/skeleton/book-item-skeleton';
+import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 
 async function AllBooks() {
     await delay(3000);
@@ -50,11 +51,7 @@ export default function Home() {
                 <Suspense
                     fallback={
                         <>
-                            {Array(3)
-                                .fill(0)
-                                .map((_, idx) => {
-                                    return <BookItemSkeleton key={idx} />;
-                                })}
+                            <BookListSkeleton count={3} />
                         </>
                     }
                 >
@@ -66,11 +63,7 @@ export default function Home() {
                 <Suspense
                     fallback={
                         <>
-                            {Array(3)
-                                .fill(0)
-                                .map((_, idx) => {
-                                    return <BookItemSkeleton key={idx} />;
-                                })}
+                            <BookListSkeleton count={3} />
                         </>
                     }
                 >
