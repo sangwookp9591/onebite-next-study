@@ -11,6 +11,11 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
     return (
         <div>
             <h3>오류가 발생했습니다.</h3>
+            {/* 서버가 다시 켜진상태에서 다시시도를 눌러도 똑같음 왜냐하면
+            reset 함수는 그냥 브라우저 측에서 즉 clinet 측에서만 
+            현재 서버로부터 전달받은 데이터를 이용해서 화면을 다시 한번 렌더링 해보기만하는 method
+            이기 때문에 데이터패칭을 다시 수행하는것은 아니기때문임
+             */}
             <button onClick={() => reset()}>다시 시도</button>
         </div>
     );
