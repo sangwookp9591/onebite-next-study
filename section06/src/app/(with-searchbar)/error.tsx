@@ -16,7 +16,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
             현재 서버로부터 전달받은 데이터를 이용해서 화면을 다시 한번 렌더링 해보기만하는 method
             이기 때문에 데이터패칭을 다시 수행하는것은 아니기때문임
              */}
-            <button onClick={() => reset()}>다시 시도</button>
+            <button onClick={() => window.location.reload()}>다시 시도</button>
         </div>
     );
 }
