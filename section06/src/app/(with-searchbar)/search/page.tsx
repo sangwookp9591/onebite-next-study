@@ -1,6 +1,7 @@
 import BookItem from '@/components/book-item';
 import { BookData } from '@/types';
 import { delay } from '@/util/delay';
+import { Suspense } from 'react';
 
 //비동기 부분을 Component로 분리
 async function SearchResult({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
@@ -27,5 +28,10 @@ async function SearchResult({ searchParams }: { searchParams: Promise<{ q?: stri
 export default function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
     //검색이 늦어질경우 전체 페이지가 지체되지 않도록 설정
 
-    return <SearchResult searchParams={searchParams} />;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            {/* 이렇게 Suspense로 비동기 함수를 감싸지면 Streaming이 된다. Suspense는 미완성상태로 남겨놓기때문에  */}
+            <SearchResult searchParams={searchParams} />
+        </Suspense>
+    );
 }
