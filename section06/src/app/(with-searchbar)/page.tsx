@@ -35,7 +35,7 @@ async function RecoBooks() {
     );
 }
 
-export default async function Home() {
+export default function Home() {
     // 이제 여기서 추천도서까지 가져 오려면 fetch 를 두번 사용해야하고 예외 처리를 두번해줘야하기때문에
     // 내부코드가 길어져서 불러와야하는 데이터에따라서 컴포넌트를 나눠서 사용
 
