@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 
 //파일과 같은 경로에 있거나 또는 하위 경로에 있는 페이지에서 오류가 발생하면 에러 컴포넌트가 페이지 컴포넌트 대신에 화면에 노출
-export default function Error({ error }: { error: Error }) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
     useEffect(() => {
         console.log(error?.message);
     }, [error]);
@@ -11,6 +11,7 @@ export default function Error({ error }: { error: Error }) {
     return (
         <div>
             <h3>오류가 발생했습니다.</h3>
+            <button onClick={() => reset()}>다시 시도</button>
         </div>
     );
 }
