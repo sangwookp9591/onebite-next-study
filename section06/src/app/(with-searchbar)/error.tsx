@@ -16,8 +16,8 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
             <h3>오류가 발생했습니다.</h3>
             <button
                 onClick={() => {
-                    router.refresh();
-                    reset();
+                    router.refresh(); //현재 페이지에 필요한 서버컴포넌트를 업데이트 -> 업데이트 이후에도 Client component인 Error Compoent가 사라지지 않는다.
+                    reset(); //그래서 reset을 호출하여 에러 상태를 초기화하고 , 컴포넌트들을 다시 렌더링
                 }}
             >
                 다시 시도
