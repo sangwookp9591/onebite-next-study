@@ -4,8 +4,7 @@ import { delay } from '@/util/delay';
 import { Suspense } from 'react';
 
 //비동기 부분을 Component로 분리
-async function SearchResult({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-    const { q } = await searchParams;
+async function SearchResult({ q }: { q?: string }) {
     await delay(3000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`, {
         cache: 'force-cache',
@@ -24,15 +23,15 @@ async function SearchResult({ searchParams }: { searchParams: Promise<{ q?: stri
     );
 }
 
-//이제 이 Page Component는 어떠한 비동기 작업도 처리하지 않기 때문에 async 제거
-export default function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-    //검색이 늦어질경우 전체 페이지가 지체되지 않도록 설정
-
+// 15.1버전부터는 async를 붙여야함 searchParams와 params는 Promise객체를 붙여줘야한다.
+export default async function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+    const { q } = await searchParams;
     return (
         // 여기까지만해도 Streaming Loading Component와 다를게 없음 다시 검색어입력시 Loading이 안나옴
-        <Suspense fallback={<div>Loading...</div>}>
+        // key={q} key값을 이용하여 q가 변경될때마다 다시 상태 로딩
+        <Suspense key={q} fallback={<div>Loading...</div>}>
             {/* 이렇게 Suspense로 비동기 함수를 감싸지면 Streaming이 된다. Suspense는 미완성상태로 남겨놓기때문에  */}
-            <SearchResult searchParams={searchParams} />
+            <SearchResult q={q} />
         </Suspense>
     );
 }
