@@ -29,6 +29,7 @@ export default function Page({ searchParams }: { searchParams: Promise<{ q?: str
     //검색이 늦어질경우 전체 페이지가 지체되지 않도록 설정
 
     return (
+        // 여기까지만해도 Streaming Loading Component와 다를게 없음 다시 검색어입력시 Loading이 안나옴
         <Suspense fallback={<div>Loading...</div>}>
             {/* 이렇게 Suspense로 비동기 함수를 감싸지면 Streaming이 된다. Suspense는 미완성상태로 남겨놓기때문에  */}
             <SearchResult searchParams={searchParams} />
