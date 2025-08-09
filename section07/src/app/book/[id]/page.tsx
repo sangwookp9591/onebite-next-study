@@ -35,7 +35,15 @@ async function BookDetail({ bookId }: { bookId: string }) {
 }
 
 function ReviewEditor() {
-    return <div>editor</div>;
+    return (
+        <section>
+            <form action="">
+                <input type="content" placeholder="리뷰 내용" />
+                <input type="author" placeholder="작성자" />
+                <button type="submit">작성하기</button>
+            </form>
+        </section>
+    );
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
