@@ -48,6 +48,21 @@ function ReviewEditor({ bookId }: { bookId: string }) {
     );
 }
 
+async function ReviewList({ bookId }: { bookId: string }) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review/book/${bookId}`);
+
+    if (!res.ok) {
+        throw new Error(`Review fetch faild : ${res.statusText}`); //이렇게 하여 error.tsx가 처리하도록 수정
+    }
+    const reviews = await res.json();
+    return (
+        <section>
+            {reviews?.map((review, idx) => (
+                <></>
+            ))}
+        </section>
+    );
+}
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
@@ -55,6 +70,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <div className={style.container}>
             <BookDetail bookId={id} />
             <ReviewEditor bookId={id} />
+            <ReviewList bookId={id} />
         </div>
     );
 }
