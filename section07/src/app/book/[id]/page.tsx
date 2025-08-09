@@ -20,7 +20,7 @@ async function BookDetail({ bookId }: { bookId: string }) {
     const { title, subTitle, description, author, publisher, coverImgUrl } = book;
 
     return (
-        <div className={style.container}>
+        <section>
             <div className={style.cover_img_container} style={{ backgroundImage: `url('${coverImgUrl}')` }}>
                 <img src={coverImgUrl} />
             </div>
@@ -30,12 +30,21 @@ async function BookDetail({ bookId }: { bookId: string }) {
                 {author} | {publisher}
             </div>
             <div className={style.description}>{description}</div>
-        </div>
+        </section>
     );
+}
+
+function ReviewEditor() {
+    return <div>editor</div>;
 }
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
-    return <BookDetail bookId={id} />;
+    return (
+        <div className={style.container}>
+            <BookDetail bookId={id} />
+            <ReviewEditor />
+        </div>
+    );
 }
