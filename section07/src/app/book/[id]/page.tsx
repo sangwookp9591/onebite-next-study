@@ -48,6 +48,7 @@ function ReviewEditor() {
         const content = formData.get('content')?.toString();
         const author = formData.get('authro')?.toString();
 
+        // 빈입력 방지를 서버와 클라이언트 모두에서 하는 이유는 서버 클라이언트 서로 100% 믿을 수 없이 때문
         if (!content || !author) return;
 
         console.log('server action called');
