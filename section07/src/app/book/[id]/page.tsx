@@ -45,13 +45,18 @@ function ReviewEditor() {
     async function createReviewAction(formData: FormData) {
         'use server';
 
+        const content = formData.get('content')?.toString();
+        const author = formData.get('authro')?.toString();
+
+        if (!content || !author) return;
+
         console.log('server action called');
     }
     return (
         <section>
             <form action={createReviewAction}>
-                <input type="content" placeholder="리뷰 내용" />
-                <input type="author" placeholder="작성자" />
+                <input required type="content" placeholder="리뷰 내용" />
+                <input required type="author" placeholder="작성자" />
                 <button type="submit">작성하기</button>
             </form>
         </section>
