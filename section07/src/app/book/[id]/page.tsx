@@ -1,4 +1,4 @@
-import { BookData } from '@/types';
+import { BookData, ReviewData } from '@/types';
 import style from './page.module.css';
 import { notFound } from 'next/navigation';
 import { createReviewAction } from '@/actions/create-review.action';
@@ -54,10 +54,10 @@ async function ReviewList({ bookId }: { bookId: string }) {
     if (!res.ok) {
         throw new Error(`Review fetch faild : ${res.statusText}`); //이렇게 하여 error.tsx가 처리하도록 수정
     }
-    const reviews = await res.json();
+    const reviews: ReviewData[] = await res.json();
     return (
         <section>
-            {reviews?.map((review, idx) => (
+            {reviews?.map((review, _) => (
                 <></>
             ))}
         </section>
