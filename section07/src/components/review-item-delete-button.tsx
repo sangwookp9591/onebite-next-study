@@ -15,7 +15,7 @@ export default function ReviewItemDeleteButton({ reviewId, bookId }: { reviewId:
             submit은 유효성 검사나 이벤트 핸들러 등을 다 무시하고 그냥 무조건 강제로 폼의 제출을
             
             */}
-            <div onClick={() => formRef?.current?.requestSubmit()}>{isPending ? '...' : '삭제하기'}</div>
+            {isPending ? <div>...</div> : <div onClick={() => formRef?.current?.requestSubmit()}>{'삭제하기'}</div>}
         </form>
     );
 }
