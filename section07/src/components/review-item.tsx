@@ -3,12 +3,12 @@ import styles from './review-item.module.css';
 
 export default function ReviewItem({ id, content, author, createdAt, bookId }: ReviewData) {
     return (
-        <div>
-            <div>{author}</div>
-            <div>{content}</div>
-            <div>
-                <div>{new Date(createdAt).toLocaleString()}</div>
-                <div>삭제하기</div>
+        <div className={styles.container}>
+            <div className={styles.authors}>{author}</div>
+            <div className={styles.content}>{content}</div>
+            <div className={styles.bottom_container}>
+                <div className={styles.date}>{new Date(createdAt).toLocaleString()}</div>
+                <div className={styles.delete_btn}>삭제하기</div>
             </div>
         </div>
     );
