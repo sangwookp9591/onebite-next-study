@@ -5,10 +5,9 @@ import { notFound } from 'next/navigation';
 export function generateStaticParams() {
     return [{ id: '1' }, { id: '2' }, { id: '3' }]; //build타임에 만들어줌
 }
-export default async function Page({ params }: { params: Promise<{ id: string | string[] }> }) {
-    const { id } = await params;
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${id}`);
+//화면에 렌더링하는기능을 별도의 컴포넌트 분리
+async function BookDetail({ bookId }: { bookId: string }) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/${bookId}`);
 
     if (!res.ok) {
         if (res.status === 404) {
@@ -33,4 +32,10 @@ export default async function Page({ params }: { params: Promise<{ id: string | 
             <div className={style.description}>{description}</div>
         </div>
     );
+}
+
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+
+    return <BookDetail bookId={id} />;
 }
