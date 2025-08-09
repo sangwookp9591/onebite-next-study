@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import styles from './review-editor.module.css';
 import { createReviewAction } from '@/actions/create-review.action';
 
@@ -15,6 +15,12 @@ export default function ReviewEditor({ bookId }: { bookId: string }) {
     //첫 번째 인수 - 핸들링하려는 폼에 액션 함수
     //두 번째 인수 - 상태의 초기값
     const [state, formAction, isPending] = useActionState(createReviewAction, null);
+
+    useEffect(() => {
+        if (state && !state.status) {
+            alert(state.error);
+        }
+    }, [state]);
 
     return (
         <section>
