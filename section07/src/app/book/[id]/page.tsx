@@ -35,9 +35,21 @@ async function BookDetail({ bookId }: { bookId: string }) {
 }
 
 function ReviewEditor() {
+    //서버엑션을 사용하는 이유
+    /**
+     * 1. 코드가 간결함
+     * 2. API를 이용해서 만들면 별도의 파일을 추가하고 경로를 설정하고 예외처리 등 부가적인 작업을 매번해야함
+     * 3. 단순한 기능만 하게될 경우에는 이렇게 간결하게 함수하나로 끝낼 수 있음.
+     * 4. 클라이언트인 브라우저에서 호출만 할 수 있을뿐 이코드를 전달받지는 못함 , 봉보민감하거나 또는 중요한 데이터를 다룰 때에도 유용하게 활용됨.
+     */
+    async function createReviewAction(formData: FormData) {
+        'use server';
+
+        console.log('server action called');
+    }
     return (
         <section>
-            <form action="">
+            <form action={createReviewAction}>
                 <input type="content" placeholder="리뷰 내용" />
                 <input type="author" placeholder="작성자" />
                 <button type="submit">작성하기</button>
