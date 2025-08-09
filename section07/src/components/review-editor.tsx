@@ -4,11 +4,13 @@ import { createReviewAction } from '@/actions/create-review.action';
 export default function ReviewEditor({ bookId }: { bookId: string }) {
     return (
         <section>
-            <form action={createReviewAction}>
+            <form className={styles.form_container} action={createReviewAction}>
                 <input name="bookId" value={bookId} hidden readOnly />
-                <input required name="content" placeholder="리뷰 내용" />
-                <input required name="author" placeholder="작성자" />
-                <button type="submit">작성하기</button>
+                <textarea required name="content" placeholder="리뷰 내용" />
+                <div className={styles.submit_container}>
+                    <input required name="author" placeholder="작성자" />
+                    <button type="submit">작성하기</button>
+                </div>
             </form>
         </section>
     );
