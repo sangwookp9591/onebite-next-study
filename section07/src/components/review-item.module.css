@@ -1,7 +1,7 @@
 .container {
     display: flex;
 }
-.authors {
+.author {
     font-size: 14px;
 }
 .content {
