@@ -2,6 +2,7 @@ import { BookData, ReviewData } from '@/types';
 import style from './page.module.css';
 import { notFound } from 'next/navigation';
 import { createReviewAction } from '@/actions/create-review.action';
+import ReviewItem from '@/components/review-item';
 
 export function generateStaticParams() {
     return [{ id: '1' }, { id: '2' }, { id: '3' }]; //build타임에 만들어줌
@@ -58,7 +59,7 @@ async function ReviewList({ bookId }: { bookId: string }) {
     return (
         <section>
             {reviews?.map((review, _) => (
-                <></>
+                <ReviewItem key={review?.id} {...review} />
             ))}
         </section>
     );
