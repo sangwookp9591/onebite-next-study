@@ -14,7 +14,7 @@ export default function ReviewItem({ id, content, author, createdAt, bookId }: R
             <div className={styles.bottom_container}>
                 <div className={styles.date}>{new Date(createdAt).toLocaleString()}</div>
                 <div className={styles.delete_btn}>
-                    <ReviewItemDeleteButton bookId={bookId} />
+                    <ReviewItemDeleteButton reviewId={id} bookId={bookId} />
                 </div>
             </div>
         </div>
