@@ -1,4 +1,7 @@
-'use server'; //별도 파일로 따로 분리해 놓았을때는 지시자를 최상단에 작성
+'use server';
+import { revalidatePath } from 'next/cache';
+
+//별도 파일로 따로 분리해 놓았을때는 지시자를 최상단에 작성
 
 //서버엑션을 사용하는 이유
 /**
@@ -24,6 +27,7 @@ export async function createReviewAction(formData: FormData) {
                 author,
             }), //네트워크 요청으로 객체를 그대로 보낼수없기 때문에 직렬화 해야한다.
         });
+        revalidatePath(`/book/${bookId}`); //이경로를 재검증하기때문에 새로불러옴
     } catch (err) {
         console.log('eror :', err);
         return;
