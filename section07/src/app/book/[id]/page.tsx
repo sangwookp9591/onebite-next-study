@@ -34,7 +34,7 @@ async function BookDetail({ bookId }: { bookId: string }) {
     );
 }
 
-function ReviewEditor() {
+function ReviewEditor({ bookId }: { bookId: string }) {
     //서버엑션을 사용하는 이유
     /**
      * 1. 코드가 간결함
@@ -51,7 +51,20 @@ function ReviewEditor() {
         // 빈입력 방지를 서버와 클라이언트 모두에서 하는 이유는 서버 클라이언트 서로 100% 믿을 수 없이 때문
         if (!content || !author) return;
 
-        console.log('server action called');
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    bookId,
+                    content,
+                    author,
+                }), //네트워크 요청으로 객체를 그대로 보낼수없기 때문에 직렬화 해야한다.
+            });
+            console.log(res.status);
+        } catch (err) {
+            console.log('eror :', err);
+            return;
+        }
     }
     return (
         <section>
@@ -70,7 +83,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     return (
         <div className={style.container}>
             <BookDetail bookId={id} />
-            <ReviewEditor />
+            <ReviewEditor bookId={id} />
         </div>
     );
 }
