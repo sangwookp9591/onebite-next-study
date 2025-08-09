@@ -10,13 +10,19 @@ import { revalidateTag } from 'next/cache';
  * 3. 단순한 기능만 하게될 경우에는 이렇게 간결하게 함수하나로 끝낼 수 있음.
  * 4. 클라이언트인 브라우저에서 호출만 할 수 있을뿐 이코드를 전달받지는 못함 , 봉보민감하거나 또는 중요한 데이터를 다룰 때에도 유용하게 활용됨.
  */
-export async function createReviewAction(formData: FormData) {
+export async function createReviewAction(state: any, formData: FormData) {
     const bookId = formData.get('bookId')?.toString();
     const content = formData.get('content')?.toString();
     const author = formData.get('authro')?.toString();
 
     // 빈입력 방지를 서버와 클라이언트 모두에서 하는 이유는 서버 클라이언트 서로 100% 믿을 수 없이 때문
-    if (!bookId || !content || !author) return;
+    if (!bookId || !content || !author) {
+        //이제는 useActionState의 state로 리턴 되기때문에 null로 리턴하지말고
+        return {
+            status: false, // state: false로 액션이 실패했다고 알려줌.
+            error: '리뷰 내용과 작성자를 입력해주세요.', // action이 왜 실패했는지를 알려줌
+        };
+    }
 
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/review`, {
@@ -28,9 +34,19 @@ export async function createReviewAction(formData: FormData) {
             }), //네트워크 요청으로 객체를 그대로 보낼수없기 때문에 직렬화 해야한다.
         });
         // revalidatePath(`/book/${bookId}`); //이경로를 재검증하기때문에 새로불러옴
+        if (!res.ok) {
+            throw new Error(res.statusText);
+        }
         revalidateTag(`review-${bookId}`); //로 효율적으로 무효화 하도록 수정
+        return {
+            status: true,
+            error: '',
+        };
     } catch (err) {
         console.log('eror :', err);
-        return;
+        return {
+            status: false, // state: false로 액션이 실패했다고 알려줌.
+            error: '리뷰 저장에 실패했습니다.', // action이 왜 실패했는지를 알려줌
+        };
     }
 }
