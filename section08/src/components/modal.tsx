@@ -31,7 +31,9 @@ export default function Modal({ children }: { children: ReactNode }) {
         }
     }, []);
     return createPortal(
-        <dialog ref={dialogRef}>{children}</dialog>,
+        <dialog className={styles.modal} ref={dialogRef}>
+            {children}
+        </dialog>,
         document.getElementById('modal-root') as HTMLElement
     );
 }
