@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styles from './modal.module.css';
 import { createPortal } from 'react-dom';
 
@@ -16,5 +16,22 @@ export default function Modal({ children }: { children: ReactNode }) {
 
     //전체화면을 다 뒤덮는 그러한 글로벌한 요소들이 될탠데 특정 페이지 컴포넌트에서 보면<div></div>안에 들어가 있으면 어색하기때문에
     //dom요소안에 modal-root에 고정적으로 모달이 위치하게끔 설정
-    return createPortal(<dialog>{children}</dialog>, document.getElementById('modal-root') as HTMLElement);
+
+    //dialog tag는 기본적으로 modal의 역할을 하기때문에 처음 렌더링되었을때 modal이 꺼져있는 상태이다.
+    const dialogRef = useRef<HTMLDialogElement>(null);
+
+    //modal component가 처음 마운트 되었을때
+    useEffect(() => {
+        if (!dialogRef.current?.open) {
+            //모달이 꺼져있으면
+            dialogRef.current?.showModal(); //모달 보이게
+            dialogRef.current?.scrollTo({
+                top: 0,
+            }); //스크롤 위치가 최상단으로 고정
+        }
+    }, []);
+    return createPortal(
+        <dialog ref={dialogRef}>{children}</dialog>,
+        document.getElementById('modal-root') as HTMLElement
+    );
 }
