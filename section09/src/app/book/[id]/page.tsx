@@ -6,8 +6,18 @@ import ReviewEditor from '@/components/review-editor';
 import Image from 'next/image';
 import { Metadata } from 'next';
 
-export function generateStaticParams() {
-    return [{ id: '1' }, { id: '2' }, { id: '3' }]; //build타임에 만들어줌
+export async function generateStaticParams() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`);
+
+    if (!res.ok) {
+        throw new Error(res?.statusText);
+    }
+    const books: BookData[] = await res.json();
+    const bookIds = books.map((item) => {
+        return { id: item?.id?.toString() };
+    });
+
+    return bookIds; //build타임에 만들어줌
 }
 //화면에 렌더링하는기능을 별도의 컴포넌트 분리
 async function BookDetail({ bookId }: { bookId: string }) {
