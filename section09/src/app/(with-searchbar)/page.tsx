@@ -4,6 +4,7 @@ import { BookData } from '@/types';
 import { delay } from '@/util/delay';
 import { Suspense } from 'react';
 import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
+import { Metadata } from 'next';
 
 async function AllBooks() {
     await delay(2000);
@@ -39,6 +40,16 @@ async function RecoBooks() {
     );
 }
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: '합입 북스',
+    description: '한입 북스에 등록된 도서를 만나보세요',
+    openGraph: {
+        title: '한입 북스',
+        description: '한입 북스에 등록된 도서를 만나보세요',
+        images: ['/thumbnail.png'], //썸네일 /->는 Pulbic폴더를 가르킨다.
+    },
+};
 
 export default function Home() {
     return (
