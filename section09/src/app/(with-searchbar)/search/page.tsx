@@ -6,7 +6,6 @@ import { Suspense } from 'react';
 
 //비동기 부분을 Component로 분리
 async function SearchResult({ q }: { q?: string }) {
-    await delay(3000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book/search?q=${q}`, {
         cache: 'force-cache',
     });
