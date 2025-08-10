@@ -16,7 +16,6 @@ async function AllBooks() {
 
     return (
         <div>
-            {' '}
             {allBooks.map((book) => (
                 <BookItem key={book.id} {...book} />
             ))}
