@@ -6,7 +6,7 @@ import { Suspense } from 'react';
 import BookListSkeleton from '@/components/skeleton/book-list-skeleton';
 
 async function AllBooks() {
-    await delay(3000);
+    await delay(2000);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/book`, { cache: 'force-cache' });
     // 요청 할때마다 매번 새롭게 발생
     if (!res.ok) {
